@@ -1,0 +1,12 @@
+# 自定义配置项
+app:
+  name: myDevApp
+  version: 1.0.2
+  author: DevJohnDoe
+  feature:
+    enable: true
+  max-connections: 100
+  hobbies:
+    - reading
+    - swimming
+    - playing guitar

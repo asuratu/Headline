@@ -1,0 +1,12 @@
+# 自定义配置项
+app:
+  name: myTestApp
+  version: 1.0.1
+  author: TestJohnDoe
+  feature:
+    enable: true
+  max-connections: 100
+  hobbies:
+    - reading222
+    - swimming
+    - playing guitar

@@ -1,0 +1,67 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 9100
+  servlet:
+    context-path: /
+spring:
+  profiles:
+    # 激活的配置文件, dev,test,prod 如果外部的key和application.yaml中的key相同, 则会覆盖application.yaml中的配置
+    active: dev
+  web:
+    resources:
+      # 配置静态资源文件夹
+      # 1. 默认是 resources/static, resources/public, resources//resources, resources/META-INF
+      # 2. 可以通过 spring.web.resources.static-locations 配置多个静态资源文件夹, 访问是不用带文件夹名
+      # 3. 如果配置了静态资源文件夹, 那默认的 /resources, /static, /public 等配置就不生效
+      static-locations: classpath:/webapp, classpath:/static
+  datasource:
+    #    type: com.alibaba.druid.pool.DruidDataSource
+    #    druid:
+    #      driver-class-name: com.mysql.cj.jdbc.Driver
+    #      url: jdbc:mysql://localhost:3306/gf-demo-user?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    #      username: root
+    #      password: tu4211241992
+
+    druid:
+      driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+      url: jdbc:p6spy:mysql://localhost:3306/gf-demo-user?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: tu4211241992
+      test-while-idle: false
+
+# 日志配置
+#logging:
+#  level:
+#    root: INFO
+#    com.baomidou.mybatisplus: DEBUG   # 打印 MyBatis-Plus 相关的日志
+#    org.apache.ibatis.logging.stdout: DEBUG # 打印 MyBatis 的 SQL 日志
+#  log4j2:
+#    config: classpath:log4j2.xml  # 你可以在 log4j2.xml 中自定义日志配置
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.heima.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 配置日志实现为控制台输出
+    cache-enabled: false  # 禁用缓存
+  global-config:
+    banner: false  # 禁用 banner
+    db-config:
+      logic-delete-field: isDeleted  # 逻辑删除属性名
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      table-prefix: news_
+      # 主键策略
+      id-type: auto
+    performance:
+      format: true  # 格式化 SQL 语句
+      max-time: 500 # 设置 SQL 最大执行时间（毫秒），超过时间会报错
+
+#jwt配置
+jwt:
+  token:
+    expiration: 120 #有效时间,单位分钟
+    signKey: headline123456  #当前程序签名秘钥 自定义
+
+
+
