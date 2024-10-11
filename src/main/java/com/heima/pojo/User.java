@@ -24,4 +24,16 @@ public class User implements Serializable {
     private Integer version;
     @TableLogic
     private Integer isDeleted;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", userPwd='" + userPwd + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", version=" + version +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

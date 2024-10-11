@@ -1,0 +1,17 @@
+###
+GET http://localhost:9100/user/index
+
+###
+POST http://localhost:9100/user/login
+Content-Type: application/json
+
+{
+  "username": "lisi",
+  "userPwd": "123456"
+}
+
+###
+GET http://localhost:9100/user/info
+Content-Type: application/json
+# 这里的token不能带引号，否则会报错, 引号也会被当做字符串的一部分
+token: eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAA_6tWKi5NUrJSiox099ANDXYNUtJRSq0oULIyNDeyMDMxNzcw11EqLU4t8kxRsjKqBQBMxtdzLwAAAA.qOH00ahZYdNxKbMZyEWDI6btiOorHdVS9LZp4H6gQsBp7-Rv6XL0PxzLmb2jU_4PxIYv1VtJ26PNjyw0kY2HJw

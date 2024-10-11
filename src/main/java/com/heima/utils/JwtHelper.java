@@ -59,6 +59,7 @@ public class JwtHelper {
                     .getExpiration().before(new Date());
         } catch (Exception e) {
             //过期出现异常，返回true
+            System.out.println(e.getMessage());
             return true;
         }
     }
