@@ -74,7 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         // 验证 token 是否过期
         if (jwtHelper.isExpiration(token)) {
-            return Result.build(null, ResultCodeEnum.NOTLOGIN);
+            return Result.build(null, ResultCodeEnum.NOT_LOGIN);
         }
 
         // 解析 token

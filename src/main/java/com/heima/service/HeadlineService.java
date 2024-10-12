@@ -21,4 +21,8 @@ public interface HeadlineService extends IService<Headline> {
     Result<?> publish(@Valid PublishNewsReq publishNewsReq);
 
     Result<?> getItem(Integer id);
+
+    Result<?> updateItem(Headline headline);
+
+    Result<?> deleteItem(Integer id);
 }

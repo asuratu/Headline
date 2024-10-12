@@ -29,4 +29,6 @@ public class Headline implements Serializable {
     private Integer version;
     @TableLogic
     private Integer isDeleted;
+
+
 }

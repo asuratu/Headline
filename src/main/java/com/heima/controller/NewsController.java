@@ -1,6 +1,7 @@
 package com.heima.controller;
 
 
+import com.heima.pojo.Headline;
 import com.heima.pojo.vo.PublishNewsReq;
 import com.heima.pojo.vo.TypeNewsReq;
 import com.heima.service.HeadlineService;
@@ -43,4 +44,15 @@ public class NewsController {
     public Result<?> getItem(@RequestParam("id") Integer id) {
         return headlineService.getItem(id);
     }
+
+    @PostMapping("/update")
+    public Result<?> update(@RequestBody Headline headline) {
+        return headlineService.updateItem(headline);
+    }
+
+    @DeleteMapping("/delete")
+    public Result<?> delete(@RequestParam("hid") Integer id) {
+        return headlineService.deleteItem(id);
+    }
+
 }

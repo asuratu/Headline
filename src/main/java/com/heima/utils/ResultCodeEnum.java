@@ -10,9 +10,10 @@ import lombok.Getter;
 public enum ResultCodeEnum {
 
     SUCCESS(200, "success"),
+    NOT_FOUND(400, "notFound"),
     USERNAME_ERROR(501, "usernameError"),
     PASSWORD_ERROR(503, "passwordError"),
-    NOTLOGIN(504, "notLogin"),
+    NOT_LOGIN(504, "notLogin"),
     USERNAME_USED(505, "userNameUsed");
 
     private final Integer code;

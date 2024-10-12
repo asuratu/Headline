@@ -1,5 +1,6 @@
 package com.heima.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.heima.mapper.HeadlineMapper;
@@ -10,6 +11,7 @@ import com.heima.pojo.vo.PublishNewsReq;
 import com.heima.pojo.vo.TypeNewsReq;
 import com.heima.service.HeadlineService;
 import com.heima.utils.Result;
+import com.heima.utils.ResultCodeEnum;
 import com.heima.utils.UserUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -74,6 +76,44 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
 
         return Result.ok(item);
     }
+
+    @Override
+    public Result<?> updateItem(Headline data) {
+        // 使用 乐观锁, 必须要先查询一下
+        Headline headline = headlineMapper.selectById(data.getHid());
+        if (headline == null) {
+            return Result.build(null, ResultCodeEnum.NOT_FOUND);
+        }
+
+        // 这个会使 version 的乐观锁失效
+//        BeanUtils.copyProperties(data, headline);
+
+        // 赋值
+        headline.setTitle(data.getTitle());
+        headline.setArticle(data.getArticle());
+        headline.setType(data.getType());
+
+        headlineMapper.updateById(headline);
+        return Result.ok(null);
+    }
+
+    @Override
+    public Result<?> deleteItem(Integer id) {
+        QueryWrapper<Headline> wrapper = new QueryWrapper<>();
+        wrapper.eq("hid", id);
+        wrapper.eq("publisher", UserUtil.getUserId());
+
+        // 只允许删除自己的文章
+        if (headlineMapper.selectCount(wrapper) == 0) {
+            return Result.build(null, ResultCodeEnum.NOT_FOUND);
+        }
+
+        // 逻辑删除
+        headlineMapper.delete(wrapper);
+        
+        return Result.ok(null);
+    }
+
 }
 
 
