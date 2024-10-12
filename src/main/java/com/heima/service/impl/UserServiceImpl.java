@@ -88,6 +88,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         map.put("userinfo", user);
         return Result.ok(map);
     }
+
+    @Override
+    public Result<?> checkUsername(String username) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        if (userMapper.selectCount(queryWrapper) > 0) {
+            return Result.build(null, ResultCodeEnum.USERNAME_USED);
+        }
+        return Result.ok(null);
+    }
+
+    @Override
+    public Result<?> register(User user) {
+        // 检查用户名是否已被注册
+//        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+//        queryWrapper.eq(User::getNickName, user.getUsername());
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", user.getUsername());
+        if (userMapper.selectCount(queryWrapper) > 0) {
+            return Result.build(null, ResultCodeEnum.USERNAME_USED);
+        }
+
+        // 注册用户
+        user.setUserPwd(MD5Util.encrypt(user.getUserPwd()));
+        userMapper.insert(user);
+        return Result.ok(null);
+    }
 }
 
 

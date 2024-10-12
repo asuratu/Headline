@@ -5,16 +5,21 @@
 <mapper namespace="com.heima.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.heima.pojo.User">
-            <id property="uid" column="uid" jdbcType="INTEGER"/>
-            <result property="username" column="username" jdbcType="VARCHAR"/>
-            <result property="userPwd" column="user_pwd" jdbcType="VARCHAR"/>
-            <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
-            <result property="version" column="version" jdbcType="INTEGER"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+        <id property="uid" column="uid" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="userPwd" column="user_pwd" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        uid,username,user_pwd,
-        nick_name,version,is_deleted
-    </sql>
+    <insert id="insertBatch">
+        insert into user(uid,username,user_pwd,
+        nick_name,version,is_deleted)
+        values
+        <foreach collection="userCollection" item="item" separator=",">
+            (#{item.uid,jdbcType=NUMERIC},#{item.username,jdbcType=VARCHAR},#{item.userPwd,jdbcType=VARCHAR},
+            #{item.nickName,jdbcType=VARCHAR},#{item.version,jdbcType=NUMERIC},#{item.isDeleted,jdbcType=NUMERIC})
+        </foreach>
+    </insert>
 </mapper>

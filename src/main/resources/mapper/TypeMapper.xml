@@ -3,16 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heima.mapper.TypeMapper">
-
-    <resultMap id="BaseResultMap" type="com.heima.pojo.Type">
-            <id property="tid" column="tid" jdbcType="INTEGER"/>
-            <result property="tname" column="tname" jdbcType="VARCHAR"/>
-            <result property="version" column="version" jdbcType="INTEGER"/>
-            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+    <resultMap id="BaseResultMap" type="Type">
+        <id property="tid" column="tid" jdbcType="INTEGER"/>
+        <result property="tname" column="tname" jdbcType="VARCHAR"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        tid,tname,version,
+        hid,title,article,
+        type,publisher,page_views,
+        create_time,update_time,version,
         is_deleted
     </sql>
+
+    <select id="selectTypeList" resultType="com.heima.dto.TypeListItem">
+        SELECT tid, tname
+        FROM news_type
+    </select>
+
+    <select id="selectByTid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from type
+        where
+        tid = #{tid,jdbcType=NUMERIC}
+    </select>
 </mapper>
