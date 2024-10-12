@@ -1,8 +1,8 @@
 package com.heima.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.heima.dto.TypeNewsReq;
 import com.heima.pojo.Headline;
+import com.heima.pojo.vo.TypeNewsReq;
 import com.heima.utils.Result;
 
 /**
@@ -13,4 +13,6 @@ import com.heima.utils.Result;
 public interface HeadlineService extends IService<Headline> {
 
     Result<?> getTypeNews(TypeNewsReq req);
+
+    Result<?> getNewsDetail(Integer id);
 }

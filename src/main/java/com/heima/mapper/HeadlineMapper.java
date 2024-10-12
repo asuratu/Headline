@@ -1,20 +1,26 @@
 package com.heima.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.heima.pojo.Headline;
+import com.heima.pojo.dto.NewsListItem;
+import com.heima.pojo.vo.TypeNewsReq;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
  * @author asura
- * @description 针对表【news_headline】的数据库操作Mapper
- * @createDate 2024-10-11 15:29:37
- * @Entity com.heima.pojo.Headline
  */
 public interface HeadlineMapper extends BaseMapper<Headline> {
     List<Headline> selectAllByHid(@Param("hid") Integer hid);
-    
+
+    // 自定义分页查询方法
+    IPage<NewsListItem> selectPageMap(IPage<NewsListItem> page,
+                                      @Param("typeNewsReq") TypeNewsReq typeNewsReq);
+
+    // 浏览量自增
+    void addViews(@Param("hid") Integer id);
 }
 
 

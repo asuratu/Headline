@@ -30,4 +30,22 @@
         where
         hid = #{hid,jdbcType=NUMERIC}
     </select>
+
+    <select id="selectPageMap" resultType="NewsListItem">
+        select hid,title,type,page_views pageViews,TIMESTAMPDIFF(HOUR,create_time,NOW()) pastHours,
+        publisher from news_headline where is_deleted=0
+        <if test="typeNewsReq.keyWords !=null and typeNewsReq.keyWords.length()>0 ">
+            and title like concat('%',#{typeNewsReq.keyWords},'%')
+        </if>
+        <if test="typeNewsReq.type != null and typeNewsReq.type != 0">
+            and type = #{typeNewsReq.type}
+        </if>
+    </select>
+
+    <!--  浏览量增加  -->
+    <update id="addViews">
+        update news_headline
+        set page_views = page_views + 1
+        where hid = #{hid,jdbcType=NUMERIC}
+    </update>
 </mapper>

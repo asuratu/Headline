@@ -1,8 +1,8 @@
 package com.heima.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.heima.dto.TypeListItem;
 import com.heima.pojo.Type;
+import com.heima.pojo.dto.TypeListItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

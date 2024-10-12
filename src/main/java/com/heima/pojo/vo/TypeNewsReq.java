@@ -1,4 +1,4 @@
-package com.heima.dto;
+package com.heima.pojo.vo;
 
 import jakarta.validation.constraints.Min;
 import lombok.Getter;

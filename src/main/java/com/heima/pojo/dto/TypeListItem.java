@@ -1,4 +1,4 @@
-package com.heima.dto;
+package com.heima.pojo.dto;
 
 import lombok.Data;
 

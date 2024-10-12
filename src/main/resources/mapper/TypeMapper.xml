@@ -17,7 +17,7 @@
         is_deleted
     </sql>
 
-    <select id="selectTypeList" resultType="com.heima.dto.TypeListItem">
+    <select id="selectTypeList" resultType="com.heima.pojo.dto.TypeListItem">
         SELECT tid, tname
         FROM news_type
     </select>
