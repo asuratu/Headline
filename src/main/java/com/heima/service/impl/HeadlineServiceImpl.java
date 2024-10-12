@@ -8,6 +8,7 @@ import com.heima.pojo.dto.NewsListItem;
 import com.heima.pojo.vo.TypeNewsReq;
 import com.heima.service.HeadlineService;
 import com.heima.utils.Result;
+import com.heima.utils.UserUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,6 +34,10 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
 
     @Override
     public Result<?> getNewsDetail(Integer id) {
+
+        // 使用 userId
+        System.out.println("User ID: " + UserUtil.getUserId());
+
         // 浏览量+1
         headlineMapper.addViews(id);
 

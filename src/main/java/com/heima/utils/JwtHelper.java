@@ -12,7 +12,7 @@ import java.util.Date;
  * @author asura
  */
 @Data
-@Component
+@Component // 这里声明这个注解的目的是什么？2
 @ConfigurationProperties(prefix = "jwt.token")
 public class JwtHelper {
 
