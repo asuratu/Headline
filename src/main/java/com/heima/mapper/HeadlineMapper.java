@@ -13,8 +13,8 @@ import java.util.List;
  * @Entity com.heima.pojo.Headline
  */
 public interface HeadlineMapper extends BaseMapper<Headline> {
-
     List<Headline> selectAllByHid(@Param("hid") Integer hid);
+    
 }
 
 

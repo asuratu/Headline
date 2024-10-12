@@ -1,8 +1,12 @@
 package com.heima.utils;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 全局统一返回结果类
@@ -38,6 +42,15 @@ public class Result<T> {
         return result;
     }
 
+    public static <T> Result<Map<String, Object>> page(IPage<T> data) {
+        Map<String, Object> pageRst = new LinkedHashMap<>();
+        pageRst.put("list", data.getRecords());
+        pageRst.put("total", data.getTotal());
+        pageRst.put("currentPageNum", data.getCurrent());
+        pageRst.put("totalPageNum", data.getPages());
+        return Result.ok(pageRst);
+    }
+
     /**
      * 操作成功
      *
@@ -46,7 +59,6 @@ public class Result<T> {
      * @return
      */
     public static <T> Result<T> ok(T data) {
-        Result<T> result = build(data);
         return build(data, ResultCodeEnum.SUCCESS);
     }
 
