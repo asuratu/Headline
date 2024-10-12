@@ -1,6 +1,7 @@
 package com.heima.controller;
 
 
+import com.heima.pojo.vo.PublishNewsReq;
 import com.heima.pojo.vo.TypeNewsReq;
 import com.heima.service.HeadlineService;
 import com.heima.utils.Result;
@@ -29,5 +30,17 @@ public class NewsController {
     @GetMapping("/detail")
     public Result<?> getDetail(@RequestParam("id") Integer id) {
         return headlineService.getNewsDetail(id);
+    }
+
+    // 注意: @Valid 默认验证 query 的参数
+    // 所以这里需要使用 @RequestBody 接收 body 参数
+    @PostMapping("/publish")
+    public Result<?> publish(@Valid @RequestBody PublishNewsReq publishNewsReq) {
+        return headlineService.publish(publishNewsReq);
+    }
+
+    @GetMapping("/item")
+    public Result<?> getItem(@RequestParam("id") Integer id) {
+        return headlineService.getItem(id);
     }
 }
