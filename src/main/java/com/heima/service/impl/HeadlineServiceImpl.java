@@ -37,9 +37,7 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
         headlineMapper.addViews(id);
 
         // 查询新闻详情
-        Headline headline = headlineMapper.selectById(id);
-
-        return Result.ok(headline);
+        return Result.ok(headlineMapper.selectDetailMap(id).values().stream().findFirst());
     }
 }
 

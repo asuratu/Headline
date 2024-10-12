@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.heima.pojo.Headline;
 import com.heima.pojo.dto.NewsListItem;
 import com.heima.pojo.vo.TypeNewsReq;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author asura
@@ -21,6 +23,9 @@ public interface HeadlineMapper extends BaseMapper<Headline> {
 
     // 浏览量自增
     void addViews(@Param("hid") Integer id);
+
+    @MapKey("hid")
+    Map<String, Object> selectDetailMap(@Param("hid") Integer id);
 }
 
 
